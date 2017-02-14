@@ -5,8 +5,11 @@ var express = require('express'),
 
 var app = express();
 
+app.set('view engine', 'jade');
+app.set('views', __dirname + '/templates');
+
 app.get('/',function(req,res){
-	res.send("<h1>I Love the Ocean!</h1>");
+	res.render('index');
 });
 
 //debugger;
@@ -17,8 +20,8 @@ app.get('/blog/:title?',function(req,res){
 		res.status(503);
 		res.send("This page is under construction");
 	} else {
-		var post = posts[title];
-		res.send(post);
+		var post = posts[title] || {};
+		res.render('post',{post: post});
 	}
 });
 
