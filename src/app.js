@@ -6,14 +6,23 @@ var express = require('express'),
 var app = express();
 
 app.get('/',function(req,res){
-	res.send("<h1>I Love China!</h1>");
+	res.send("<h1>I Love the Ocean!</h1>");
 });
 
-app.get('/blog',function(req,res){
-	res.send(posts);
+//debugger;
+
+app.get('/blog/:title?',function(req,res){
+	var title = req.params.title;
+	if(title === undefined){
+		res.status(503);
+		res.send("This page is under construction");
+	} else {
+		var post = posts[title];
+		res.send(post);
+	}
 });
 
 
-app.listen(4000,function(){
-	console.log("The frontend server is running on port 4000");
+app.listen(5000,function(){
+	console.log("The frontend server is running on port 5000");
 });
