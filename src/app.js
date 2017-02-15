@@ -20,6 +20,15 @@ app.get('/',function(req,res){
 	res.render('index');
 });
 
+app.get('/posts',function(req,res){
+	if(req.query.raw){
+		res.json(posts);
+	} else {
+		res.json(postsLists);
+	}
+
+});
+
 //debugger;
 
 app.get('/blog/:title?',function(req,res){
